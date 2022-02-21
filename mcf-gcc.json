@@ -15,5 +15,5 @@
             "make"
         ]
     ],
-    "env_add_path": "bin",
+    "env_add_path": "bin"
 }
