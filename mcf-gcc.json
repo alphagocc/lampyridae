@@ -1,11 +1,11 @@
 {
     "homepage": "https://gcc-mcf.lhmouse.com/",
     "description": "GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Ada, Go, and D, as well as libraries for these languages (libstdc++,...).",
-    "version": "11.2.1_20220125",
+    "version": "11.2.1_20220308",
     "license": "GPL-3.0-or-later,ZPL-2.1,...",
     "architecture": {
         "64bit": {
-            "url": "https://gcc-mcf.lhmouse.com/mingw-w64-gcc-mcf_20220125_11.2.1_x64-msvcrt_9a7740a94ad53a88302133723b616fe74c2f1f82.7z",
+            "url": "https://gcc-mcf.lhmouse.com/mingw-w64-gcc-mcf_20220308_11.2.1_x64-msvcrt_124c0fb45eaac323964c750d1084b49e20928d5e.7z",
             "extract_dir": "mingw64"
         }
     },
