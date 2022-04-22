@@ -1,11 +1,11 @@
 {
     "homepage": "http://winlibs.com/",
     "description": "GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Ada, Go, and D, as well as libraries for these languages (libstdc++,...). (MingW port)",
-    "version": "11.2.0-9.0.0-r6",
+    "version": "11.3.0-10.0.0-msvcrt-r1",
     "license": "GPL-3.0-or-later,ZPL-2.1,...",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/brechtsanders/winlibs_mingw/releases/download/11.2.0-9.0.0-msvcrt-r6/winlibs-x86_64-posix-seh-gcc-11.2.0-mingw-w64-9.0.0-r6.7z",
+            "url": "https://github.com/brechtsanders/winlibs_mingw/releases/download/11.3.0-14.0.1-10.0.0-msvcrt-r1/winlibs-x86_64-posix-seh-gcc-11.3.0-mingw-w64msvcrt-10.0.0-r1.7z",
             "extract_dir": "mingw64"
         }
     },
