@@ -1,0 +1,58 @@
+name: Update winlibs-gcc
+
+on:
+  workflow_dispatch:
+  schedule:
+    # once a day, 06:17 UTC
+    - cron: '17 6 * * *'
+
+concurrency:
+  group: update-winlibs-gcc
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  BRANCH: auto/update-winlibs-gcc
+
+jobs:
+  update:
+    name: Check upstream releases
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update manifests
+        id: update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .github/scripts/update-winlibs-gcc.py
+
+      - name: Open pull request
+        if: steps.update.outputs.updated == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUMMARY: ${{ steps.update.outputs.summary }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          git switch -c "$BRANCH"
+          git add bucket
+          git commit -m "winlibs-gcc: $SUMMARY"
+          git push --force origin "$BRANCH"
+
+          existing=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh pr edit "$existing" --title "winlibs-gcc: $SUMMARY" --body-file pr-body.md
+            echo "updated existing PR #$existing"
+          else
+            gh pr create \
+              --base "${{ github.event.repository.default_branch }}" \
+              --head "$BRANCH" \
+              --title "winlibs-gcc: $SUMMARY" \
+              --body-file pr-body.md
+          fi
